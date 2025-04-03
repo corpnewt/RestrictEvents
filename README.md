@@ -38,6 +38,7 @@ _Note_: Apple CPU identifier must be `0x0F01` for 8 core CPUs or higher and `0x0
   - `pci` - prevent PCI and RAM configuration notifications on MacPro7,1 platforms
   - `gmux` - block displaypolicyd on Big Sur+ (for genuine MacBookPro9,1/10,1)
   - `media` - block mediaanalysisd on Ventura+ (for Metal 1 GPUs)
+  - `perfps` - block PerfPowerServices and PerfPowerServicesExtended on macOS 15.4 or newer
   - `none` - disable all blocking
   - `auto` - same as `pci`
 
