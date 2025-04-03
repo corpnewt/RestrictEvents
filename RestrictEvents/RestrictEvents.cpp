@@ -301,6 +301,15 @@ struct RestrictEventsPolicy {
 			}
 		}
 
+		// PerfPowerServices and PerfPowerServicesExtended consume tons of CPU on 15.4+
+		if (strstr(value, "perfps", strlen("perfps"))) {
+			if ((getKernelVersion() == KernelVersion::Sequoia && getKernelMinorVersion() >= 4) || getKernelVersion() > KernelVersion::Sequoia) {
+				DBGLOG("rev", "disabling PerfPowerServices and PerfPowerServicesExtended");
+				procBlacklist[i++] = (char *)"/usr/libexec/PerfPowerServices";
+				procBlacklist[i++] = (char *)"/usr/libexec/PerfPowerServicesExtended";
+			}
+		}
+
 		for (auto &proc : procBlacklist) {
 			if (proc == nullptr) break;
 			DBGLOG("rev", "blocking %s", proc);
